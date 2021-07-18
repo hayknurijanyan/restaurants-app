@@ -1,13 +1,181 @@
+* {
+  margin: 0;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+ul {
+  margin: 2px;
+  padding: 2px;
+}
+
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  /* background-color: rgb(146, 208, 224); */
+}
+.header {
+  padding: 1% 2.5%;
+  background-color: #022641;
+  color: whitesmoke;
+}
+
+.main {
+  display: flex;
+  height: 82vh;
+}
+
+.restaurants {
+  padding: 2%;
+  background-color: #f5fafc;
+  flex-grow: 1;
+  min-width: 50%;
+  height: 100%;
+  overflow: scroll;
+}
+
+.meal-icon {
+  color: #fedf17;
+  font-size: 50px;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.meal-icon:hover {
+  color: #fedf17;
+  transform: scale(1.3);
+}
+
+.icon-detail {
+  display: none;
+  margin-top: 8px;
+  border-radius: 6px;
+  background-color: rgb(230, 230, 230);
+  color: #000000;
+  font-size: 14px;
+  text-align: center;
+  width: 54px;
+  height: 34px;
+  transition: transform 0.9s;
+}
+
+.meal-icon:hover + .icon-detail {
+  display: block;
+}
+
+.restaurant {
+  display: flex;
+  justify-content: space-between;
+  padding: 1%;
+  border: 1px solid rgb(11, 62, 129);
+  border-radius: 5px;
+  margin: 2% 0;
+}
+.restaurant-main-info {
+  min-width: 72%;
+}
+
+.restaurant-main-info:hover {
+  cursor: pointer;
+}
+
+.map {
+  background-color: rgb(207, 207, 207);
+  flex-grow: 2;
+}
+
+.main-button {
+  margin: auto 0;
+  border-radius: 6px;
+  border: none;
+  color: #022641;
+  height: 50px;
+  background-color: #c2e7f5;
+  padding: 0 10px;
+  font-size: large;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+}
+.main-button:hover {
+  background-color: #4cbbe4;
+  color: aliceblue;
+}
+.restaurant-detail {
+  background-color: #f5fafc;
+  height: 82vh;
+  padding: 2%;
+}
+
+.restaurant-detail-reviews input {
+  background-color: #ffffff;
+  outline: none;
+  border: 1px solid rgb(194, 194, 194);
+  border-radius: 5px;
+  height: 40px;
+  margin: 7px 0;
+}
+.restaurant-detail > h2 {
+  margin-bottom: 5px;
+}
+
+.restaurant-detail-reviews {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.restaurant-detail-reviews .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.restaurant-detail-reviews .row > input {
+  /* margin-left: 2%; */
+  width: 49%;
+}
+.restaurant-detail-reviews textarea {
+  width: 100%;
+  background-color: #ffffff;
+  outline: none;
+  border: 1px solid rgb(194, 194, 194);
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.restaurant-detail-reviews > h3 {
+  margin: 10px 0;
+}
+.restaurant-detail-reviews li {
+  display: flex;
+  flex-direction: column;
+  padding: 1%;
+  border: 1px solid rgb(11, 62, 129);
+  border-radius: 5px;
+  margin: 1% 0;
+}
+
+@media only screen and (max-width: 1000px) {
+  .main {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .main {
+    display: flex;
+    height: 93vh;
+  }
 }
