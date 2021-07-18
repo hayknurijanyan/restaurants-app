@@ -7,7 +7,6 @@ import { useEffect } from "react";
 const Map = () => {
   const selectedRestaurant = useSelector((state) => state.selectedRestaurant);
   const restaurantsData = useSelector((state) => state.restaurantsData);
-
   const [center, setCenter] = useState({
     lat: 40.17,
     lng: 44.49,
