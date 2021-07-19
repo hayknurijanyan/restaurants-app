@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateRestaurants } from "../features/RestaurantsSlice";
+import { db } from "../firebase";
+import { rateCounter } from "../features/ReviewsSlice";
 
 const RestaurantDetail = ({ match }) => {
   const { id } = match.params;
-  const restaurantsData = useSelector((state) => state.restaurantsData);
-  const restaurant = useSelector((state) =>
-    state.restaurantsData.find((data) => data.name === id)
-  );
+  const allRestaurantsData = useSelector((state) => state.restaurantsData);
+
+  const restaurantsData = [...allRestaurantsData];
+  const restaurant = restaurantsData.find((data) => data.name === id);
 
   const dispatch = useDispatch();
   const [nameValue, setNameValue] = useState("");
   const [textValue, setTextValue] = useState("");
   const [ratingValue, setRatingValue] = useState("");
+
+  const newReview = {
+    name: nameValue,
+    rating: ratingValue,
+    date: new Date().toISOString().substring(0, 10),
+    text: textValue,
+  };
 
   const handleAddReview = () => {
     if (
@@ -22,14 +31,32 @@ const RestaurantDetail = ({ match }) => {
       ratingValue === ""
     ) {
       alert("please fill form correctly");
-      return -1;
+      return;
     } else {
-      restaurant.reviews.unshift({
-        name: nameValue,
-        rating: ratingValue,
-        date: new Date().toISOString().substring(0, 10),
-        text: textValue,
-      });
+      if (!restaurant.reviews) {
+        restaurant.reviews = [];
+      }
+      try {
+        restaurant.reviews.unshift(newReview);
+        db.collection("restaurantsData")
+          .where("name", "==", restaurant.name)
+          .get()
+          .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              // console.log(doc.id, " => ", doc.data());
+              db.collection("restaurantsData")
+                .doc(doc.id)
+                .update({
+                  reviews: [...restaurant.reviews],
+                  rating: rateCounter(restaurant.reviews),
+                });
+            });
+          });
+      } catch {
+        restaurant.review.shift();
+        alert("Something went wrong");
+      }
+      restaurant.rating = rateCounter(restaurant.reviews);
       dispatch(updateRestaurants(restaurantsData));
       setNameValue("");
       setTextValue("");
@@ -80,17 +107,18 @@ const RestaurantDetail = ({ match }) => {
         <button className="main-button" onClick={handleAddReview}>
           Add Review
         </button>
-        {restaurant.reviews.map((review, i) => {
-          return (
-            <li key={i}>
-              <h3>
-                {review.name} - {review.rating}☆
-              </h3>
-              <h6>{review.date}</h6>
-              <p style={{ margin: "5px 0" }}>{review.text}</p>
-            </li>
-          );
-        })}
+        {restaurant.reviews &&
+          restaurant.reviews.map((review, i) => {
+            return (
+              <li key={i}>
+                <h3>
+                  {review.name} - {review.rating}☆
+                </h3>
+                <h6>{review.date}</h6>
+                <p style={{ margin: "5px 0" }}>{review.text}</p>
+              </li>
+            );
+          })}
       </div>
     </div>
   ) : (

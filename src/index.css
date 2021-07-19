@@ -62,13 +62,14 @@ li {
 
 .icon-detail {
   display: none;
-  margin-top: 8px;
-  border-radius: 6px;
+  padding: 3px;
+  margin-top: 10px;
+  border-radius: 4px;
   background-color: rgb(230, 230, 230);
   color: #000000;
   font-size: 14px;
   text-align: center;
-  width: 54px;
+  width: 72px;
   height: 34px;
   transition: transform 0.9s;
 }
@@ -119,6 +120,7 @@ li {
   background-color: #f5fafc;
   height: 82vh;
   padding: 2%;
+  width: 100%;
 }
 
 .restaurant-detail-reviews input {

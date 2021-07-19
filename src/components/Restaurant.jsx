@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Restaurant = ({ data, match, handleRestaurantClick }) => {
-  return (
+  return data ? (
     <div className="restaurant">
       <div
         onClick={() => handleRestaurantClick(data)}
@@ -11,7 +11,11 @@ const Restaurant = ({ data, match, handleRestaurantClick }) => {
         <h2>{data.name}</h2>
         <ul>
           <li>Rating {data.rating}☆</li>
-          <li>Reviews {data.reviews.length}</li>
+          {data.reviews ? (
+            <li>Reviews {data.reviews.length}</li>
+          ) : (
+            <li>Reviews 0</li>
+          )}
           <li>Open {data.hours}</li>
         </ul>
       </div>
@@ -19,6 +23,8 @@ const Restaurant = ({ data, match, handleRestaurantClick }) => {
         <button className="main-button">View Restaurant</button>
       </Link>
     </div>
+  ) : (
+    <h1>Loading Data</h1>
   );
 };
 

@@ -4,17 +4,8 @@ import RestaurantsList from "./components/RestaurantsList";
 import Map from "./components/Map";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import RestaurantDetail from "./components/RestaurantDetail";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { loadRestaurants } from "./features/RestaurantsSlice";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(loadRestaurants());
-  }, [dispatch]);
-
   return (
     <Router>
       <div className="app">

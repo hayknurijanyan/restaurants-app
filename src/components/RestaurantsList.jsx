@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Restaurant from "./Restaurant";
 import { selectRestaurant } from "../features/RestaurantsSlice";
+import { loadRestaurants } from "../features/RestaurantsSlice";
 
 const RestaurantsList = () => {
-  const sortedRestaurants = useSelector((state) => state.restaurantsData).sort(
-    (a, b) => b.rating - a.rating
-  );
+  const sortedRestaurants = useSelector((state) => state.restaurantsData);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadRestaurants());
+  }, []);
 
   const restaurantClick = (data) => {
     dispatch(selectRestaurant(data));

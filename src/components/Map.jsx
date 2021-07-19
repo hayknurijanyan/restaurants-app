@@ -18,12 +18,9 @@ const Map = () => {
     setZoom(13);
   }, [selectedRestaurant]);
 
-  // const handleRestaurantClick = (location) => {};
-
   return (
     <div style={{ height: "90vh", width: "100%" }}>
       <GoogleMapReact
-        //   bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
         defaultCenter={{
           lat: 40.17,
           lng: 44.49,

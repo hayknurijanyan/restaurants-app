@@ -1,10 +1,13 @@
 import { loadRestaurantsData } from "./RestaurantsAPI";
 
 export const RestaurantsReducer = (state = [], action) => {
-  if (action.type === "update-restaurants-data") {
-    return action.payload;
+  switch (action.type) {
+    case "update-restaurants-data": {
+      return action.payload;
+    }
+    default:
+      return state;
   }
-  return state;
 };
 
 export const selectedRestaurantReducer = (state = "", action) => {
@@ -26,11 +29,19 @@ export const selectRestaurant = (newData) => {
   };
 };
 export const updateRestaurants = (newData) => {
+  console.log(newData);
   return {
     type: "update-restaurants-data",
     payload: newData,
   };
 };
+
+// export const updateRestaurant = (newData) => {
+//   return {
+//     type: "update-restaurants-data",
+//     payload: newData,
+//   };
+// };
 
 export const loadRestaurants = () => {
   return (dispatch, getState) => {
