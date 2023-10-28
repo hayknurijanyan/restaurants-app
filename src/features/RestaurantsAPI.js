@@ -17,5 +17,4 @@ export const loadRestaurantsData = () => {
 
 export const updateRestaurantData = () => {
   return new Promise((resolve, reject) => {});
-  console.log();
 };

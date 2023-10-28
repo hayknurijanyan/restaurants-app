@@ -10,7 +10,7 @@ const RestaurantsList = () => {
 
   useEffect(() => {
     dispatch(loadRestaurants());
-  }, []);
+  }, [dispatch]);
 
   const restaurantClick = (data) => {
     dispatch(selectRestaurant(data));
